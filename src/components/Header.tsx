@@ -5,19 +5,18 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { label: "🏠 ホーム", href: "/" },
-  { label: "🛒 商品", href: "/products" },
-  { label: "📰 チラシ", href: "/flyer" },
   { label: "🎟️ クーポン", href: "/coupon" },
   { label: "🎪 キャンペーン", href: "/campaign" },
-  { label: "🌤️ 天気", href: "/weather" },
   { label: "🏪 店舗情報", href: "/store-info" },
 ];
 
 export default function Header() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname =
+    rawPathname !== "/" ? rawPathname.replace(/\/$/, "") : rawPathname;
 
   return (
-    <header className="bg-gradient-to-r from-pink-300 via-purple-200 to-pink-300 shadow-lg border-b-4 border-pink-300">
+    <header className="bg-white shadow-sm border-b-2 border-pink-200">
       <div className="max-w-5xl mx-auto px-4 py-4">
         <div className="text-center mb-3">
           <h1 className="text-2xl font-bold text-purple-700 tracking-wider garbled">
@@ -34,8 +33,8 @@ export default function Header() {
                 href={item.href}
                 className={`px-4 py-1.5 rounded-full text-sm font-bold transition-all duration-200 border-2 ${
                   isActive
-                    ? "bg-pink-400 text-white border-pink-400 shadow-md scale-105"
-                    : "bg-white text-pink-500 border-pink-300 hover:bg-pink-100 hover:scale-105"
+                    ? "bg-pink-100 text-pink-600 border-pink-300"
+                    : "bg-white text-pink-400 border-pink-200 hover:bg-pink-50"
                 }`}
               >
                 {item.label}

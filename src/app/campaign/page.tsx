@@ -9,8 +9,8 @@ export default function CampaignPage() {
         </p>
       </div>
 
-      <div className="bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-200 rounded-3xl p-6 shadow-sm">
-        <h2 className="text-xl font-bold text-rose-600 mb-3">
+      <div className="bg-pink-50 border border-pink-200 rounded-3xl p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-pink-600 mb-3">
           「ポエムの募集」は締め切りました
         </h2>
         <p className="text-gray-700 leading-relaxed text-sm">
@@ -23,8 +23,8 @@ export default function CampaignPage() {
         </p>
       </div>
 
-      <div className="mt-6 bg-yellow-50 border-2 border-yellow-200 rounded-3xl p-5">
-        <p className="text-sm text-yellow-700 leading-relaxed">
+      <div className="mt-6 bg-purple-50 border border-purple-200 rounded-3xl p-5">
+        <p className="text-sm text-purple-700 leading-relaxed">
           担当者が「ポエムを読んで感情が揺れすぎる」と言って作業を止めているため、
           結果発表のタイミングはわりとふんわりしています。店の閉店より先に出せるよう努力します。
         </p>

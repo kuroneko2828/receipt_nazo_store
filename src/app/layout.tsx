@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 import Header from "@/components/Header";
 
@@ -20,12 +21,28 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-mint-light font-rounded">
+      <body className="min-h-screen font-rounded">
         <Header />
         <main className="pt-4 pb-16">{children}</main>
-        <footer className="bg-pink-100 border-t-2 border-pink-200 py-6 text-center text-sm text-pink-400">
-          <p>🌸 縺ｻ縺壹ｒ繧ｺ縺ｹ繝医い 🌸</p>
-          <p className="mt-1 text-xs">長年のご愛顧ありがとうございました</p>
+        <footer className="bg-white border-t border-pink-200 py-3">
+          <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <nav className="flex flex-wrap items-center gap-x-1 text-[10px] text-gray-400">
+              <Link href="/privacy" className="hover:text-pink-400 transition-colors px-1.5">
+                個人情報の取り扱いについて
+              </Link>
+              <span className="text-pink-200">|</span>
+              <Link href="/terms" className="hover:text-pink-400 transition-colors px-1.5">
+                サイトご利用規約
+              </Link>
+              <span className="text-pink-200">|</span>
+              <Link href="/contact" className="hover:text-pink-400 transition-colors px-1.5">
+                お問い合わせ
+              </Link>
+            </nav>
+            <p className="text-[10px] text-gray-400 whitespace-nowrap">
+              Copyright © 縺ｻ縺壹ｒ繧ｺ縺ｹ繝医い All Rights Reserved.
+            </p>
+          </div>
         </footer>
       </body>
     </html>
