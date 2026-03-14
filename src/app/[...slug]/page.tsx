@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+const allowedUnderConstructionPaths = ["products", "flyer", "store-info"] as const;
+
+export function generateStaticParams() {
+  return allowedUnderConstructionPaths.map((slug) => ({ slug: [slug] }));
+}
+
+export const dynamicParams = false;
+
 export default function UnderConstructionPage() {
   return (
     <div className="max-w-lg mx-auto px-4 py-16 text-center">

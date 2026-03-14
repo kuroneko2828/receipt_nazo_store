@@ -60,7 +60,7 @@ export async function fetchWeather(): Promise<DayWeather[]> {
     "&past_days=3" +
     "&forecast_days=4";
 
-  const res = await fetch(url, { next: { revalidate: 3600 } });
+  const res = await fetch(url);
   const data: OpenMeteoResponse = await res.json();
 
   const today = new Date();

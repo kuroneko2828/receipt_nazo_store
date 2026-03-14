@@ -8,6 +8,7 @@ const navItems = [
   { label: "🛒 商品", href: "/products" },
   { label: "📰 チラシ", href: "/flyer" },
   { label: "🎟️ クーポン", href: "/coupon" },
+  { label: "🎪 キャンペーン", href: "/campaign" },
   { label: "🌤️ 天気", href: "/weather" },
   { label: "🏪 店舗情報", href: "/store-info" },
 ];

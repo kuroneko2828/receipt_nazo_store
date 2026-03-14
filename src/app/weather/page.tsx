@@ -1,7 +1,5 @@
 import { fetchWeather, weatherCodeToInfo } from "@/lib/weather";
 
-export const revalidate = 3600;
-
 export default async function WeatherPage() {
   const days = await fetchWeather();
   const todayIndex = days.findIndex((d) => d.label === "今日");
