@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import Header from "@/components/Header";
-
 export const metadata: Metadata = {
-  title: "縺ｻ縺壹ｒ繧ｺ縺ｹ繝医い | ｽ繝ｰ繧ｺ繝医い",
-  description: "縺ｪ縺壹ｒ繧ｺ縺ｹ繝医い - 地域密着型スーパーマーケット",
+  title: "繝√�繧ｺ | 繝√�繧ｺ",
+  description: "繝√�繧ｺ - 地域密着型スーパーマーケット",
 };
 
 export default function RootLayout({
@@ -40,7 +39,7 @@ export default function RootLayout({
               </Link>
             </nav>
             <p className="text-[10px] text-gray-400 whitespace-nowrap">
-              Copyright © 縺ｻ縺壹ｒ繧ｺ縺ｹ繝医い All Rights Reserved.
+              Copyright © 繝√�繧ｺ All Rights Reserved.
             </p>
           </div>
         </footer>

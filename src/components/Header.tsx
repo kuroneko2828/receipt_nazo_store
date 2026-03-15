@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { label: "🏠 ホーム", href: "/" },
-  { label: "🎟️ クーポン", href: "/coupon" },
-  { label: "🎪 キャンペーン", href: "/campaign" },
+  { label: "🎟️ おトク", href: "/otoku" },
+  { label: "✍️ ポエム投稿", href: "/poem" },
   { label: "🏪 店舗情報", href: "/store-info" },
 ];
 
@@ -20,9 +20,9 @@ export default function Header() {
       <div className="max-w-5xl mx-auto px-4 py-4">
         <div className="text-center mb-3">
           <h1 className="text-2xl font-bold text-purple-700 tracking-wider garbled">
-            縺ｻ縺壹ｒ繧ｺ縺ｹ繝医い
+            繝√�繧ｺ
           </h1>
-          <p className="text-xs text-pink-500 mt-0.5">✨ 地域のみなさまに愛されたお店 ✨</p>
+          <p className="text-xs text-pink-500 mt-0.5">✨ 地域のみなさまに愛されるはずだったお店 ✨</p>
         </div>
         <nav className="flex flex-wrap justify-center gap-2">
           {navItems.map((item) => {

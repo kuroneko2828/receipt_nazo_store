@@ -1,8 +1,28 @@
-import { fetchWeather, weatherCodeToInfo } from "@/lib/weather";
+function weatherCodeToInfo(code: number) {
+  if (code <= 1) return { emoji: "☀️", label: "晴れ", bg: "from-amber-50 to-yellow-50" };
+  if (code <= 3) return { emoji: "⛅", label: "くもり", bg: "from-gray-50 to-slate-100" };
+  if (code <= 48) return { emoji: "🌫️", label: "霧", bg: "from-gray-100 to-gray-200" };
+  if (code <= 57) return { emoji: "🌧️", label: "小雨", bg: "from-blue-50 to-cyan-50" };
+  if (code <= 67) return { emoji: "🌧️", label: "雨", bg: "from-blue-100 to-indigo-100" };
+  if (code <= 77) return { emoji: "❄️", label: "雪", bg: "from-sky-50 to-blue-50" };
+  if (code <= 82) return { emoji: "🌧️", label: "にわか雨", bg: "from-blue-100 to-indigo-100" };
+  if (code <= 86) return { emoji: "❄️", label: "にわか雪", bg: "from-sky-100 to-blue-100" };
+  return { emoji: "⛈️", label: "雷雨", bg: "from-indigo-100 to-purple-100" };
+}
 
-export default async function WeatherPage() {
-  const days = await fetchWeather();
-  const todayIndex = days.findIndex((d) => d.label === "今日");
+const days = [
+  { date: "2026-03-12", label: "3日前",  weatherCode: 3,  tempMax: 11, tempMin: 4, precipitationProbability: 10 },
+  { date: "2026-03-13", label: "2日前",  weatherCode: 3,  tempMax: 10, tempMin: 3, precipitationProbability: 20 },
+  { date: "2026-03-14", label: "昨日",   weatherCode: 3,  tempMax: 14, tempMin: 4, precipitationProbability: 10 },
+  { date: "2026-03-15", label: "今日",   weatherCode: 3,  tempMax: 14, tempMin: 5, precipitationProbability: 10 },
+  { date: "2026-03-16", label: "明日",   weatherCode: 55, tempMax: 13, tempMin: 6, precipitationProbability: 80 },
+  { date: "2026-03-17", label: "明後日", weatherCode: 3,  tempMax: 14, tempMin: 4, precipitationProbability: 20 },
+  { date: "2026-03-18", label: "3日後",  weatherCode: 3,  tempMax: 15, tempMin: 5, precipitationProbability: 10 },
+];
+
+const todayIndex = days.findIndex((d) => d.label === "今日");
+
+export default function WeatherPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
@@ -88,7 +108,7 @@ export default async function WeatherPage() {
           ☔ 雨の日は惣菜コーナーのタイムセールをお見逃しなく！
         </p>
         <p className="text-xs text-gray-400 mt-1">
-          ※ 天気データはOpen-Meteo APIより取得（1時間ごとに更新）
+          ※ 天気情報はイメージです
         </p>
       </div>
     </div>

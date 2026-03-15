@@ -8,7 +8,7 @@ export default function TermsPage() {
 
         <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
           <p>
-            利用規約を書く気力が残っておりません。
+            利用規約作っていないことに今更ながら気づきましたが、ただいま書く気力が残っておりません。
           </p>
           <p>
             つきましては、倫理的に考えてよくないことは、どうかご自身の判断でお控えください。

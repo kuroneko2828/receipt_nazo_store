@@ -1,37 +1,26 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-const DATES = [
-  "1月15日", "2月1日", "2月7日", "2月14日", "2月21日",
-  "2月28日", "3月1日", "3月7日", "3月14日",
-];
+import { useState, useEffect } from "react";
 
 const PRODUCTS = [
-  { id: "p1", name: "国産鶏もも肉（100g）" },
-  { id: "p2", name: "有機野菜セット" },
-  { id: "p3", name: "手作りコロッケ（1個）" },
-  { id: "p4", name: "お刺身盛り合わせ" },
-  { id: "p5", name: "食パン（6枚切り）" },
+  { id: "p1", name: "お菓子" },
+  { id: "p2", name: "飲料" },
+  { id: "p3", name: "果物" },
+  { id: "p4", name: "野菜" },
+  { id: "p5", name: "日用品" },
 ];
 
-const COUPONS = [
-  { id: "c1", name: "閉店感謝セール 全品割引" },
-  { id: "c2", name: "生鮮食品まとめ買い割引" },
-  { id: "c3", name: "惣菜コーナー タイムセール" },
-  { id: "c4", name: "お菓子まとめ買い割引" },
-  { id: "c5", name: "閉店記念 ポイント大増量" },
-  { id: "c6", name: "訳あり野菜 特別割引" },
-  { id: "c7", name: "お子様連れ応援クーポン" },
-  { id: "c8", name: "朝市クーポン" },
-];
-
-const CAMPAIGNS = [
-  { id: "ca1", name: "あなたのスーパー愛ポエム募集" },
-  { id: "ca2", name: "閉店記念スタンプラリー" },
-  { id: "ca3", name: "ありがとうフォトコンテスト" },
-  { id: "ca4", name: "閉店カウントダウンプレゼント" },
+const COUPON_CAMPAIGNS = [
+  { id: "cp1", name: "サンキュー割" },
+  { id: "cp2", name: "まとめ買い割" },
+  { id: "cp3", name: "ゆきまつり割" },
+  { id: "cp4", name: "ダイスの日割" },
+  { id: "cp5", name: "早起き三文割" },
+  { id: "cm1", name: "不用品買取キャンペーン" },
+  { id: "cm2", name: "雨の日ご来店感謝デー" },
+  { id: "cm3", name: "年末年始 福袋販売" },
+  { id: "cm4", name: "バレンタイン チョコレートフェア" },
 ];
 
 const CATEGORIES = [
@@ -56,7 +45,7 @@ const CATEGORIES = [
     id: "other",
     label: "その他",
     subs: [
-      { id: "campaign", label: "キャンペーンについて" },
+      { id: "poem", label: "ポエム投稿" },
       { id: "deficit", label: "赤字の理由" },
     ],
   },
@@ -64,21 +53,23 @@ const CATEGORIES = [
 
 const CAUSE_CATEGORIES = [
   { id: "product", label: "商品" },
-  { id: "coupon", label: "クーポン" },
-  { id: "campaign", label: "キャンペーン" },
+  { id: "coupon_campaign", label: "クーポン・キャンペーン" },
+  { id: "staff", label: "店員" },
 ];
 
 function isCorrectDeficit(
-  date: string,
+  month: string,
+  day: string,
   causeCategory: string,
   causeItems: string[]
 ): boolean {
   return (
-    date === "2月28日" &&
-    causeCategory === "coupon" &&
+    month === "2" &&
+    day === "28" &&
+    causeCategory === "coupon_campaign" &&
     causeItems.length === 2 &&
-    causeItems.includes("c1") &&
-    causeItems.includes("c3")
+    causeItems.includes("cp2") &&
+    causeItems.includes("cm1")
   );
 }
 
@@ -87,17 +78,31 @@ export default function ContactPage() {
   const [mainCat, setMainCat] = useState("");
   const [subCat, setSubCat] = useState("");
   const [freeText, setFreeText] = useState("");
-  const [deficitDate, setDeficitDate] = useState("");
+  const [deficitMonth, setDeficitMonth] = useState("");
+  const [deficitDay, setDeficitDay] = useState("");
   const [deficitCauseCategory, setDeficitCauseCategory] = useState("");
   const [deficitCauseItems, setDeficitCauseItems] = useState<string[]>([]);
+  const [deficitStaffNo, setDeficitStaffNo] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [deficitDestination, setDeficitDestination] = useState("");
+
+  useEffect(() => {
+    if (!isLoading || !deficitDestination) return;
+    const timer = setTimeout(() => {
+      router.push(deficitDestination);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [isLoading, deficitDestination, router]);
 
   const selectedMain = CATEGORIES.find((c) => c.id === mainCat);
   const isDeficit = subCat === "deficit";
 
   const resetDeficit = () => {
-    setDeficitDate("");
+    setDeficitMonth("");
+    setDeficitDay("");
     setDeficitCauseCategory("");
     setDeficitCauseItems([]);
+    setDeficitStaffNo("");
   };
 
   const handleMainCatChange = (id: string) => {
@@ -116,6 +121,7 @@ export default function ContactPage() {
   const handleDeficitCauseCategoryChange = (id: string) => {
     setDeficitCauseCategory(id);
     setDeficitCauseItems([]);
+    setDeficitStaffNo("");
   };
 
   const handleItemToggle = (id: string) => {
@@ -126,19 +132,17 @@ export default function ContactPage() {
 
   const getCauseItems = () => {
     if (deficitCauseCategory === "product") return PRODUCTS;
-    if (deficitCauseCategory === "coupon") return COUPONS;
-    if (deficitCauseCategory === "campaign") return CAMPAIGNS;
+    if (deficitCauseCategory === "coupon_campaign") return COUPON_CAMPAIGNS;
     return [];
   };
 
   const canSubmit = () => {
     if (!mainCat || !subCat) return false;
     if (isDeficit) {
-      return (
-        deficitDate !== "" &&
-        deficitCauseCategory !== "" &&
-        deficitCauseItems.length > 0
-      );
+      if (deficitMonth === "" || deficitDay === "") return false;
+      if (deficitCauseCategory === "") return false;
+      if (deficitCauseCategory === "staff") return deficitStaffNo.trim() !== "";
+      return deficitCauseItems.length > 0;
     }
     return freeText.trim().length > 0;
   };
@@ -146,19 +150,33 @@ export default function ContactPage() {
   const handleSubmit = () => {
     if (!canSubmit()) return;
     if (isDeficit) {
-      if (isCorrectDeficit(deficitDate, deficitCauseCategory, deficitCauseItems)) {
-        router.push("/contact/ending");
-      } else {
-        router.push("/contact/result?type=deficit");
-      }
+      const dest = isCorrectDeficit(deficitMonth, deficitDay, deficitCauseCategory, deficitCauseItems)
+        ? "/contact/ending"
+        : "/contact/result?type=deficit";
+      setDeficitDestination(dest);
+      setIsLoading(true);
     } else if (mainCat === "praise") {
       router.push("/contact/result?type=praise");
     } else if (mainCat === "claim") {
       router.push("/contact/result?type=claim");
     } else {
-      router.push("/contact/result?type=campaign");
+      router.push("/contact/result?type=poem");
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-8">
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-pink-200 flex flex-col items-center justify-center min-h-[300px]">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-pink-200 border-t-pink-500 mb-6" />
+          <p className="text-lg font-bold text-purple-600">調査中...</p>
+          <p className="text-sm text-gray-500 mt-2">
+            ただいま原因を調べています。少々お待ちください。
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
@@ -234,18 +252,28 @@ export default function ContactPage() {
               <label className="text-sm font-bold text-gray-700 block mb-2">
                 赤字の原因となった日付
               </label>
-              <select
-                value={deficitDate}
-                onChange={(e) => setDeficitDate(e.target.value)}
-                className="w-full border border-gray-200 rounded-2xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:border-pink-300"
-              >
-                <option value="">日付を選択してください</option>
-                {DATES.map((d) => (
-                  <option key={d} value={d}>
-                    {d}
-                  </option>
-                ))}
-              </select>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  min={1}
+                  max={12}
+                  value={deficitMonth}
+                  onChange={(e) => setDeficitMonth(e.target.value)}
+                  placeholder="月"
+                  className="w-20 border border-gray-200 rounded-2xl px-4 py-3 text-sm text-gray-700 text-center focus:outline-none focus:border-pink-300"
+                />
+                <span className="text-sm text-gray-500">月</span>
+                <input
+                  type="number"
+                  min={1}
+                  max={31}
+                  value={deficitDay}
+                  onChange={(e) => setDeficitDay(e.target.value)}
+                  placeholder="日"
+                  className="w-20 border border-gray-200 rounded-2xl px-4 py-3 text-sm text-gray-700 text-center focus:outline-none focus:border-pink-300"
+                />
+                <span className="text-sm text-gray-500">日</span>
+              </div>
             </div>
 
             {/* 原因カテゴリ */}
@@ -268,8 +296,8 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* 具体的な原因 */}
-            {deficitCauseCategory && (
+            {/* 具体的な原因（商品 / クーポン・キャンペーン） */}
+            {deficitCauseCategory && deficitCauseCategory !== "staff" && (
               <div>
                 <p className="text-sm font-bold text-gray-700 mb-3">
                   具体的な原因（複数選択可）
@@ -294,6 +322,23 @@ export default function ContactPage() {
                     </label>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* 店員No入力 */}
+            {deficitCauseCategory === "staff" && (
+              <div>
+                <label className="text-sm font-bold text-gray-700 block mb-2">
+                  店員No.
+                </label>
+                <input
+                  type="number"
+                  min={1}
+                  value={deficitStaffNo}
+                  onChange={(e) => setDeficitStaffNo(e.target.value)}
+                  placeholder="店員の番号を入力"
+                  className="w-full border border-gray-200 rounded-2xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:border-pink-300"
+                />
               </div>
             )}
           </div>

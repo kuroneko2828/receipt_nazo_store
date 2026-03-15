@@ -28,25 +28,12 @@ export default function UnderConstructionPage() {
           </p>
         </div>
 
-        {/* 工事イラスト的なもの */}
-        <div className="flex justify-center gap-3 mb-6 text-3xl">
-          <span>👷</span>
-          <span>🔨</span>
-          <span>⛑️</span>
-        </div>
-
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/"
             className="bg-pink-400 text-white font-bold px-6 py-3 rounded-full hover:bg-pink-500 transition-colors duration-200 shadow-sm"
           >
             🏠 ホームに戻る
-          </Link>
-          <Link
-            href="/coupon"
-            className="bg-purple-400 text-white font-bold px-6 py-3 rounded-full hover:bg-purple-500 transition-colors duration-200 shadow-sm"
-          >
-            🎟️ クーポンを見る
           </Link>
         </div>
       </div>
