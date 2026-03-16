@@ -22,7 +22,7 @@ export default function Header() {
           <h1 className="text-2xl font-bold text-purple-700 tracking-wider garbled">
             繝√�繧ｺ
           </h1>
-          <p className="text-xs text-pink-500 mt-0.5">✨ 地域のみなさまに愛されるはずだったお店 ✨</p>
+          <p className="text-xs text-pink-500 mt-0.5">地域のみなさまに愛されるはずだったお店</p>
         </div>
         <nav className="flex flex-wrap justify-center gap-2">
           {navItems.map((item) => {
