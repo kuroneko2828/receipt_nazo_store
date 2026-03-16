@@ -47,7 +47,7 @@ export default function Home() {
       {/* 店内写真 */}
       <div className="rounded-3xl overflow-hidden shadow-sm border border-pink-200">
         <Image
-          src="/images/super.png"
+          src="/images/404.png"
           alt="店内の様子"
           width={960}
           height={540}

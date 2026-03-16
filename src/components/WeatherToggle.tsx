@@ -141,9 +141,6 @@ export default function WeatherToggle() {
 
           {/* フッター */}
           <div className="px-4 py-3 border-t border-pink-100">
-            <p className="text-[10px] text-gray-400 text-center">
-              ※ 天気情報はイメージです
-            </p>
           </div>
         </div>
       </div>

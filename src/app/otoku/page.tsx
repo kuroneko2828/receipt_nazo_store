@@ -1,5 +1,5 @@
-import Link from "next/link";
 import WeatherToggle from "@/components/WeatherToggle";
+import Link from "next/link";
 
 interface Coupon {
   id: number;
@@ -119,8 +119,9 @@ export default function OtokuPage() {
               <h3 className="text-sm font-bold text-amber-700">ご利用上の注意</h3>
             </div>
             <ul className="space-y-1 text-sm text-amber-800 ml-6 list-disc">
-              <li>クーポンの重複使用はご遠慮ください。</li>
-              <li>一部クーポンは在庫状況によりご利用いただけない場合があります。</li>
+              <li>いずれのクーポンも、300円以上のお買い物が必要となります。</li>
+              <li>クーポンは条件を満たしている場合、自動で適用されます。</li>
+              <li>ただし、天気が条件のクーポンについては、お客様の自己申告かつ店員の判断により適用されます。</li>
             </ul>
           </div>
         </section>

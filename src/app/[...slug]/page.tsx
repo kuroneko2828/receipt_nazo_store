@@ -24,7 +24,7 @@ export default function UnderConstructionPage() {
             <br />
             <br />
             担当者がやる気を失っているため、しばらくこのままになります。
-            そもそも店も閉まるので、完成しない可能性が高いです。
+            そもそも店が閉まって完成しない可能性が高いです。
           </p>
         </div>
 
