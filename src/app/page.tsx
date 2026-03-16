@@ -70,7 +70,7 @@ export default function Home() {
           <h3 className="font-bold text-purple-600 mb-1">アクセス</h3>
           <p className="text-sm text-gray-600">
             〒XXX-XXXX<br />
-            遘狗伐逵� 莠募哨蟶� 蜿ｳ谺�逕ｺ 邨ｵ蟆乗焔
+            遘狗伐逵� 莠募哨蟶� 蜿ｳ谺�逕ｺ 邨ｵ蟆乗焔 X-X-X
           </p>
         </div>
       </div>
